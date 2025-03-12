@@ -1,0 +1,27 @@
+package com.example.cloudframe.ai.tools;
+
+import com.cloudframe.ai.tools.ToolExecutionListener;
+import com.cloudframe.ai.tools.ToolResult;
+
+import java.util.Map;
+
+/**
+ * A simple tool execution listener that logs events.
+ */
+public class ToolExecutionLogger implements ToolExecutionListener {
+    @Override
+    public void beforeToolExecution(String toolName, Map<String, Object> parameters) {
+        System.out.println("Executing tool: " + toolName + " with parameters: " + parameters);
+    }
+
+    @Override
+    public void afterToolExecution(ToolResult result) {
+        System.out.println("Tool execution completed: " + result);
+    }
+
+    @Override
+    public void onToolExecutionError(ToolResult result, Exception exception) {
+        System.err.println("Tool execution failed: " + result);
+        exception.printStackTrace();
+    }
+}
