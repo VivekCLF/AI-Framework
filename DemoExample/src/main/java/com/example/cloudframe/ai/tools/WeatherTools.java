@@ -1,6 +1,6 @@
 package com.example.cloudframe.ai.tools;
 
-import com.cloudframe.ai.tools.ToolAnnotation;
+import com.cloudframe.ai.tools.annotation.ToolAnnotation.AITool;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.Map;
 /**
  * A class that provides weather-related tools.
  */
-public class WeatherTool {
+public class WeatherTools {
 
-    @ToolAnnotation.AITool(
+    @AITool(
             description = "Get the current weather for a city",
             schema = "{\"type\":\"object\",\"properties\":{\"city\":{\"type\":\"string\"}},\"required\":[\"city\"]}"
     )
@@ -26,7 +26,7 @@ public class WeatherTool {
         return result;
     }
 
-    @ToolAnnotation.AITool(
+    @AITool(
             name = "getForecast",
             description = "Get a 5-day weather forecast for a city",
             schema = "{\"type\":\"object\",\"properties\":{\"city\":{\"type\":\"string\"},\"days\":{\"type\":\"integer\",\"default\":5}},\"required\":[\"city\"]}",
@@ -43,7 +43,7 @@ public class WeatherTool {
         );
     }
 
-    @ToolAnnotation.AITool(
+    @AITool(
             description = "Search the web for information",
             schema = "{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}"
     )

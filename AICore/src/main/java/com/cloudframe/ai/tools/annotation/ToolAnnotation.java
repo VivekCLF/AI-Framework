@@ -1,4 +1,4 @@
-package com.cloudframe.ai.tools;
+package com.cloudframe.ai.tools.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  * A framework for defining and executing tools that can be used by AI agents.
- * Inspired by Spring AI and Lang4j but with a simplified and flexible approach.
  */
 public class ToolAnnotation {
 
@@ -28,7 +27,7 @@ public class ToolAnnotation {
         String description();
 
         /**
-         * Schema information for the parameters, can be JSON Schema or other format.
+         * Schema information for the tool parameters, can be JSON Schema or other format.
          */
         String schema() default "";
 

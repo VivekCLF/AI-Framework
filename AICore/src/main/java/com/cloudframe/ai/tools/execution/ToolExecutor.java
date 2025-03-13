@@ -1,4 +1,9 @@
-package com.cloudframe.ai.tools;
+package com.cloudframe.ai.tools.execution;
+
+import com.cloudframe.ai.tools.Tool;
+import com.cloudframe.ai.tools.exception.ToolException.ToolErrorCode;
+import com.cloudframe.ai.tools.registry.ToolRegistry;
+import com.cloudframe.ai.tools.result.ToolResult;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -24,7 +29,7 @@ public class ToolExecutor {
      */
     public ToolResult execute(String toolName, Map<String, Object> parameters) {
         if (!registry.hasTool(toolName)) {
-            return ToolResult.failure(toolName, "Tool not found", 0);
+            return ToolResult.failure(toolName, "Tool not found", 0, ToolErrorCode.TOOL_NOT_FOUND);
         }
 
         Tool tool = registry.getTool(toolName);
@@ -46,7 +51,7 @@ public class ToolExecutor {
             return toolResult;
         } catch (Exception e) {
             long endTime = System.currentTimeMillis();
-            ToolResult toolResult = ToolResult.failure(toolName, e.getMessage(), endTime - startTime);
+            ToolResult toolResult = ToolResult.failure(toolName, e.getMessage(), endTime - startTime, ToolErrorCode.EXECUTION_ERROR);
 
             if (listener != null) {
                 listener.onToolExecutionError(toolResult, e);
